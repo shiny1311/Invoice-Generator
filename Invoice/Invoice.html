@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Invoice Generator</title>
+    <link rel="stylesheet" href="C:\Users\Admin\Documents\Invoice\style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <form id="invoiceForm">
+        <h1 contenteditable="true">Name</h1>
+
+        <div class="form-header">
+          <div class="form-group">
+            <label for="invoiceNo">Invoice No:</label>
+            <input type="text" id="invoiceNo" required />
+          </div>
+          <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" required />
+          </div>
+        </div>
+
+        <div class="details-box">
+          <div class="details-content">
+            <div class="client-details">
+              <h3>Client Details</h3>
+              <label for="clientName">Client Name:</label>
+              <input type="text" id="clientName" required />
+
+              <label for="clientAddress">Client Address:</label>
+              <input type="text" id="clientAddress" required />
+
+              <label for="clientContact">Contact No:</label>
+              <input type="text" id="clientContact" required />
+
+              <label for="poNo">PO No:</label>
+              <input type="text" id="poNo" required />
+            </div>
+
+            <div class="company-details">
+              <h3>Company Details</h3>
+              <label for="companyName">Company Name:</label>
+              <input type="text" id="companyName" required />
+
+              <label for="companyAddress">Company Address:</label>
+              <input type="text" id="companyAddress" required />
+
+              <label for="trainerName">Trainer Name:</label>
+              <input type="text" id="trainerName" required />
+
+              <label for="trainerPhone">Trainer PhoneNo:</label>
+              <input type="text" id="trainerPhone" required />
+            </div>
+          </div>
+        </div>
+
+        <div class="details-box">
+          <h3>Service Details</h3>
+          <div id="serviceContainer"></div>
+          <button type="button" onclick="addService()">Add Service</button>
+          <button type="button" onclick="deleteService()">Delete Service</button>
+        </div>
+
+        
+
+        <div class="details-box">
+          <h3>Bank Details</h3>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bankName">Bank Name:</label>
+              <input type="text" id="bankName" required />
+            </div>
+            <div class="form-group">
+              <label for="accountNo">Account No:</label>
+              <input type="text" id="accountNo" required />
+            </div>
+            <div class="form-group">
+              <label for="ifscCode">IFSC Code:</label>
+              <input type="text" id="ifscCode" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="accountHolder">Account Holder Name:</label>
+              <input type="text" id="accountHolder" required />
+            </div>
+            <div class="form-group">
+              <label for="panNo">Pan No:</label>
+              <input type="text" id="panNo" required />
+            </div>
+            <div class="form-group">
+              <label for="bankAddress">Bank Address:</label>
+              <input type="text" id="bankAddress" required />
+            </div>
+          </div>
+        </div>
+
+        <button type="submit">Generate Invoice</button>
+      </form>
+
+      <div id="invoice">
+        <div class="invoice-header">
+          <h2>INVOICE</h2>
+          <div>
+            <p>
+              <strong>Invoice No:</strong> <span id="displayInvoiceNo"></span>
+            </p>
+            <p><strong>Date:</strong> <span id="displayDate"></span></p>
+          </div>
+        </div>
+
+        <div class="details-box">
+          <div class="details-content">
+            <div>
+              <h3>CLIENT</h3>
+              <p id="displayClientName"></p>
+              <p id="displayClientAddress"></p>
+              <p>
+                <strong>Contact No:</strong>
+                <span id="displayClientContact"></span>
+              </p>
+              <p><strong>PO No:</strong> <span id="displayPoNo"></span></p>
+            </div>
+            <div>
+              <h3>COMPANY</h3>
+              <p id="displayCompanyName"></p>
+              <p id="displayCompanyAddress"></p>
+              <p>
+                <strong>Trainer Name:</strong>
+                <span id="displayTrainerName"></span>
+              </p>
+              <p>
+                <strong>Trainer Phone:</strong>
+                <span id="displayTrainerPhone"></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Quantity</th>
+              <th>Rate (INR)</th>
+              <th>Amount (INR)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="displayDescription"></td>
+              <td id="displayQuantity"></td>
+              <td id="displayRate"></td>
+              <td id="displayAmount"></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="details-box">
+          <p><strong>Total Amount:</strong> ₹<span id="displayTotal"></span></p>
+          <p>
+            <strong>Amount in words:</strong>
+            <span id="displayAmountInWords"></span>
+          </p>
+        </div>
+
+        <div class="bank-details">
+          <h3>Bank Details</h3>
+          <p><strong>Bank Name:</strong> <span id="displayBankName"></span></p>
+          <p>
+            <strong>Account No:</strong> <span id="displayAccountNo"></span>
+          </p>
+          <p><strong>IFSC Code:</strong> <span id="displayIfscCode"></span></p>
+          <p>
+            <strong>Account Holder Name:</strong>
+            <span id="displayaccountHolder"></span>
+          </p>
+          <p><strong>Pan No:</strong> <span id="displaypanNo"></span></p>
+          <p>
+            <strong>Bank Address:</strong> <span id="displaybankAddress"></span>
+          </p>
+        </div>
+
+        <div class="signature">
+          <p>(Signature)</p>
+          <p>
+            <strong>Trainer Name:</strong>
+            <span id="displayTrainerName2"></span>
+          </p>
+        </div>
+
+        <div class="button-container">
+          <button onclick="editInvoice()" class="left-button">
+            Edit Invoice
+          </button>
+          <button onclick="downloadInvoice()" class="right-button">
+            Download Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script type="text/javascript" src="C:\Users\Admin\Documents\Invoice\script.js"></script>
+  </body>
+</html>
